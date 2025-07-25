@@ -29,7 +29,10 @@ function createHashMap(){
     }
 
     const set = (key, value) => {
-
+        const hashCode = hash(key);
+        if(hashMapArray[hashCode] === null){
+            // hashMapArray[hashCode] = createLinkedList().append
+        }
     }
 
 }
