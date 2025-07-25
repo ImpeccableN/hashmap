@@ -9,4 +9,12 @@ function createHashMap(){
         hashMapArray.push(null);
     };
 
+    const doubleCapacity = () => {
+        const oldCap = capacity;
+        capacity *= 2;
+        for(let i = oldCap; i < capacity; i++){
+            hashMapArray.push(null);
+        }
+    };
+
 }
