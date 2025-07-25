@@ -4,8 +4,8 @@ export function createLinkedList() {
   let headNode = null;
   let tailNode = null;
 
-  const append = (value) => {
-    const newNode = createNode(value);
+  const append = (key, value) => {
+    const newNode = createNode(key, value);
     if (headNode === null) {
       headNode = newNode;
       tailNode = newNode;
@@ -15,8 +15,8 @@ export function createLinkedList() {
     }
   };
 
-  const prepend = (value) => {
-    const newNode = createNode(value);
+  const prepend = (key, value) => {
+    const newNode = createNode(key, value);
     if (headNode !== null) {
       newNode.nextNode = headNode;
       headNode = newNode;
@@ -56,19 +56,35 @@ export function createLinkedList() {
     }
   };
 
-  const contains = (value, crtNode = headNode) => {
+  const containsValue = (value, crtNode = headNode) => {
     if (crtNode.value === value) return true;
     else if (crtNode === tailNode && crtNode.value !== value) return false;
     else {
-      return contains(value, crtNode.nextNode);
+      return containsValue(value, crtNode.nextNode);
     }
   };
 
-  const find = (value, index = 0, crtNode = headNode) => {
+  const containsKey = (key, crtNode = headNode) => {
+    if (crtNode.key === key) return true;
+    else if (crtNode === tailNode && crtNode.key !== key) return false;
+    else {
+      return containsKey(key, crtNode.nextNode);
+    }
+  };
+
+  const findValue = (value, index = 0, crtNode = headNode) => {
     if (crtNode.value === value) return index;
     else if (crtNode === tailNode && crtNode.value !== value) return null;
     else {
-      return find(value, index + 1, crtNode.nextNode);
+      return findValue(value, index + 1, crtNode.nextNode);
+    }
+  };
+
+  const findKey = (key, index = 0, crtNode = headNode) => {
+    if (crtNode.key === key) return index;
+    else if (crtNode === tailNode && crtNode.key !== key) return null;
+    else {
+      return findKey(key, index + 1, crtNode.nextNode);
     }
   };
 
@@ -81,20 +97,20 @@ export function createLinkedList() {
     }
   };
 
-  const insertAt = (value, index, crtNode = headNode) => {
+  const insertAt = (key, value, index) => {
     if (index === 0 && headNode === null) {
-      let newNode = createNode(value);
+      let newNode = createNode(key, value);
       headNode = newNode;
     } else if (index === 0) {
-      let newNode = createNode(value, headNode);
+      let newNode = createNode(key, value, headNode);
       headNode = newNode;
     } else if (at(index - 1) === null) {
       return;
     } else if (at(index - 1).nextNode === null) {
-      let newNode = createNode(value);
+      let newNode = createNode(key, value);
       at(index - 1).nextNode = newNode;
     } else {
-      let newNode = createNode(value, at(index));
+      let newNode = createNode(key, value, at(index));
       at(index - 1).nextNode = newNode;
     }
   };
@@ -108,8 +124,10 @@ export function createLinkedList() {
     tail,
     at,
     pop,
-    contains,
-    find,
+    containsValue,
+    containsKey,
+    findValue,
+    findKey,
     toString,
     insertAt
   };

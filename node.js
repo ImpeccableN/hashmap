@@ -1,3 +1,3 @@
-export function createNode(value = null, nextNode = null) {
-  return { value, nextNode };
+export function createNode(key = null, value = null, nextNode = null) {
+  return { key, value, nextNode };
 }
