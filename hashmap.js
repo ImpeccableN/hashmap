@@ -26,12 +26,14 @@ function createHashMap(){
         }
 
         return hashCode
-    }
+    };
 
     const set = (key, value) => {
         const hashCode = hash(key);
         if(hashMapArray[hashCode] === null){
-            // hashMapArray[hashCode] = createLinkedList().append
+            hashMapArray[hashCode] = createLinkedList().append(key, value);
+        } else if(hashMapArray[hashCode]) {
+            //what to do when key exists
         }
     }
 
